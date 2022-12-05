@@ -1,0 +1,16 @@
+<application>
+  <component name="FileTypeManager" version="17">
+    <extensionMap>
+      <mapping pattern="BNB" type="Dart" />
+      <mapping pattern="home" type="Dart" />
+      <mapping pattern="create_a_profile" type="Dart" />
+      <mapping pattern="BottomNavigationBar" type="Dart" />
+      <mapping pattern="fonts" type="Font" />
+      <mapping ext="webp" type="Image" />
+      <mapping ext="gradle.kts" type="Kotlin" />
+      <mapping ext="main.kts" type="Kotlin" />
+      <mapping pattern="lul" type="PLAIN_TEXT" />
+      <mapping pattern="LogList.dart" type="PLAIN_TEXT" />
+    </extensionMap>
+  </component>
+</application>
