@@ -1,6 +1,6 @@
 # tracker_app
 
-A new Flutter application.
+A Tracker Application for dogs.
 
 ## Getting Started
 
