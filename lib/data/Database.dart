@@ -6,7 +6,6 @@ import 'package:tracker_app/data/walks.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
-//import 'package:appprojekt/models/user.dart';
 import 'dart:async';
 import 'dart:io' as io;
 
