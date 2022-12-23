@@ -114,33 +114,29 @@ class DBProvider {
     return jsonEncode(resultRecords);
   }
 
-  /* Date and distance get need to be implemented still
-  Future<String> getDate(String email, String questionnaire, int i) async {
+  Future<String> getDate(String name, int i) async {
     var db = await database;
     var resultDate = await db.rawQuery('''
-    SELECT date FROM ques WHERE email = ? AND questionnaire = ?''',
-        [email, questionnaire]);
+    SELECT date FROM walks WHERE name = ?''',
+        [name]);
     if (resultDate.length == 0) return null;
 
-    if (questionnaire == "ERQ") {
-      Map<dynamic, dynamic> map = resultDate[i];
-      String str1 = map["date"];
+    Map<dynamic, dynamic> map = resultDate[i];
+    String str = map["date"];
 
-      return str1;
-    }
+    return str;
+  }
 
-    if (questionnaire == "FSFI") {
-      Map<dynamic, dynamic> map = resultDate[i];
-      String str2 = map["date"];
+  Future<String> getDistance(String name, int i) async {
+    var db = await database;
+    var resultDistance = await db.rawQuery('''
+    SELECT distance FROM walks WHERE name = ?''',
+        [name]);
+    if (resultDistance.length == 0) return null;
 
-      return str2;
-    }
+    Map<dynamic, dynamic> map = resultDistance[i];
+    String str = map["distance"];
 
-    if ((questionnaire == "EMQUE") || (questionnaire == "emQue")) {
-      Map<dynamic, dynamic> map = resultDate[i];
-      String str3 = map["date"];
-
-      return str3;
-    }
-  }*/
+    return str;
+  }
 }
