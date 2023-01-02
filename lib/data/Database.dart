@@ -41,8 +41,7 @@ class DBProvider {
           ''');
           await db.execute('''
           CREATE TABLE walks (
-            id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING, date TIMESTAMP DEFAULT CURRENT_DATE NOT NULL, distance INTEGER, 
-            
+            id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING, date TIMESTAMP DEFAULT CURRENT_DATE NOT NULL, distance INTEGER
           )
           ''');
         }, version: 4);
@@ -58,6 +57,15 @@ class DBProvider {
     ''', [newDog.name, newDog.age]);
 
     return res;
+  }
+
+  getUser() async{
+    final db = await database;
+    var dog = await db.rawQuery('''
+    SELECT * FROM profile''');
+    if (dog.length == 0) return null;
+
+    return Data.fromJson(dog.first);
   }
 
   Future<Data> getData(String race) async {

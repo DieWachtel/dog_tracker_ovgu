@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tracker_app/pages/Home Page/MyHomePage.dart';
+import 'package:tracker_app/pages/Welcome Page/MyWelcomePage.dart';
 import 'package:tracker_app/widgets/BottomNavigation.dart';
 // this is a change i hope to see merged
 // this is a change to the Olivia Branch
@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Track Pet',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyBottomNavigationBar(currentIndex: 0),
+      home: MyWelcomePage(),//MyBottomNavigationBar(currentIndex: 0),
     );
   }
 }
