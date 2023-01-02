@@ -7,18 +7,7 @@ import 'package:tracker_app/widgets/BottomNavigation.dart';
 
 
 class MyWelcomePage extends StatefulWidget {
-  MyWelcomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  MyWelcomePage({Key key}) : super(key: key);
 
   @override
   _MyWelcomePageState createState() => _MyWelcomePageState();
@@ -27,7 +16,7 @@ class MyWelcomePage extends StatefulWidget {
 class _MyWelcomePageState extends State<MyWelcomePage> {
 
   // ignore: non_constant_identifier_names
-  Future<void> pushtoWelcome() async{
+  Future<void> pushToWelcome() async{
     Dog dogy = await DBProvider.db.getUser();
     if(dogy == null){
       var newDog = Dog(name: 'please create Profile', age: 5);
@@ -107,7 +96,7 @@ class _MyWelcomePageState extends State<MyWelcomePage> {
                   )
               ),
               onPressed: () async {
-               pushtoWelcome();
+               pushToWelcome();
               }
             )
           ],
