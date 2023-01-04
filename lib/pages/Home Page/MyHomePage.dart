@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tracker_app/data/Database.dart';
 import 'package:tracker_app/data/dog.dart';
+import 'package:tracker_app/widgets/DataProvider.dart';
 import 'package:tracker_app/widgets/DogProvider.dart';
 import 'package:tracker_app/widgets/BottomNavigation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:tracker_app/data/data.dart';
+import 'package:tracker_app/widgets/DataProvider.dart';
 
 
 
@@ -14,6 +17,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Dog dog = DogProvider.of(context).dog;
+    Data data = DataProvider.of(context).data;
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -60,7 +64,7 @@ class MyHomePage extends StatelessWidget {
                   alignment: Alignment.center,
                   color: Colors.white70, // changing dependent on km
                   child: AutoSizeText(
-                    '0/10 km',
+                    '0/${data.distance.toString()} km',
                     style: TextStyle(fontSize: 22),
                     maxLines: 1,
                     )

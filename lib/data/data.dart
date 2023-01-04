@@ -5,21 +5,21 @@ Data userFromJson(String str) => Data.fromJson(json.decode(str));
 String userToJson(Data data) => json.encode(data.toJson());
 
 class Data {
-  String race;
+  String size;
   int distance;
 
   Data({
-    this.race,
+    this.size,
     this.distance,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    race: json["race"],
+    size: json["size"],
     distance: json["distance"],
   );
 
   Map<String, dynamic> toJson() => {
-    "race": race,
+    "size": size,
     "distance": distance,
   };
 }

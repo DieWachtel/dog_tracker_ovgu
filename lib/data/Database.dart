@@ -31,12 +31,12 @@ class DBProvider {
         onCreate: (db, version) async {
           await db.execute('''
           CREATE TABLE profile (
-            name TEXT, age INTEGER
+            id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, size TEXT
           )
         ''');
           await db.execute('''
           CREATE TABLE data (
-            race TEXT, distance INTEGER
+            size TEXT, distance INTEGER
           )
           ''');
           await db.execute('''
@@ -52,43 +52,59 @@ class DBProvider {
 
     var res = await db.rawInsert('''
       INSERT INTO profile(
-        name, age
-      ) VALUES (?, ?)
-    ''', [newDog.name, newDog.age]);
+        name, age, size
+      ) VALUES (?, ?, ?)
+    ''', [newDog.name, newDog.age, newDog.size]);
 
     return res;
   }
 
-  getUser() async{
+  Future<Dog> getUser(int id) async{
     final db = await database;
-    var dog = await db.rawQuery('''
-    SELECT * FROM profile''');
-    if (dog.length == 0) return null;
+    var result = await db.rawQuery('''
+    SELECT * FROM profile WHERE id = ?''', [id]);
+    if (result.length == 0) {
+      print("getUser null");
+      return null;}
 
-    return Data.fromJson(dog.first);
+    return Dog.fromJson(result.first);
   }
 
-  Future<Data> getData(String race) async {
+  newData(Data data) async{
+    final db = await database;
+
+      var res = await db.rawInsert('''
+        INSERT INTO data(
+        size, distance
+        ) VALUES (?, ?)
+        ''', [data.size, data.distance]);
+
+      return res;
+  }
+
+  Future<Data> getData(String size) async {
     var db = await database;
     var result = await db.rawQuery('''
-    SELECT distance FROM data WHERE race = ?''', [race]);
+    SELECT * FROM data WHERE size = ?''', [size]);
     if (result.length == 0) return null;
 
     return Data.fromJson(result.first);
   }
 
-  Future<int> changeName(String name) async {
+  Future<int> changeName(String name, String oldname) async {
     var db = await database;
     var changeName = await db.rawUpdate('''
-    UPDATE profile SET name = ?''', [name]);
+    UPDATE profile SET name = ? WHERE name = ?
+    ''', [name, oldname]);
+    print('changed');
 
     return changeName;
   }
 
-  Future<int> changeAge(int age) async {
+  Future<int> changeAge(int age, String name) async {
     var db = await database;
     var changeAge = await db.rawUpdate('''
-    UPDATE profile SET age = ?''', [age]);
+    UPDATE profile SET age = ? WHERE name = ?''', [age, name]);
 
     return changeAge;
   }

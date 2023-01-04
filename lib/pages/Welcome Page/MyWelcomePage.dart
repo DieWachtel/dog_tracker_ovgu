@@ -1,44 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:tracker_app/data/Database.dart';
 import 'package:tracker_app/data/dog.dart';
+import 'package:tracker_app/widgets/DataProvider.dart';
 import 'package:tracker_app/widgets/DogProvider.dart';
 import 'package:tracker_app/widgets/BottomNavigation.dart';
-
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:tracker_app/data/data.dart';
 
 
 class MyWelcomePage extends StatefulWidget {
   MyWelcomePage({Key key}) : super(key: key);
-
+  
   @override
   _MyWelcomePageState createState() => _MyWelcomePageState();
 }
 
 class _MyWelcomePageState extends State<MyWelcomePage> {
-
+  
+  
   // ignore: non_constant_identifier_names
   Future<void> pushToWelcome() async{
-    Dog dogy = await DBProvider.db.getUser();
+    //init predefined dog distances
+    Data data = await DBProvider.db.getData('gross');
+    if (data == null){
+
+      var _gross = Data(size: 'gross', distance: 10);
+      var _mittel = Data(size: 'mittel', distance: 7);
+      var _klein = Data(size: 'klein', distance: 5);
+      var _undef = Data(size: 'nichts', distance: 0);
+
+      final List<Data> _dogData = [
+        _gross,
+        _mittel,
+        _klein,
+        _undef,
+      ];
+
+      for(var i = 0; i < 4; i++) {
+        await DBProvider.db.newData(_dogData[i]);
+      }
+    }
+
+    Dog dogy = await DBProvider.db.getUser(1);
     if(dogy == null){
-      var newDog = Dog(name: 'please create Profile', age: 5);
+      data = await DBProvider.db.getData('nichts');
+      var newDog = Dog(id: 1, name: 'please create Profile', age: 0, size: 'nichts');
+      await DBProvider.db.newUser(newDog);
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => DogProvider(
                 dog: newDog,
-                child: MyBottomNavigationBar(
+                child: DataProvider(
+                    data: data,
+                    child: MyBottomNavigationBar(
                   currentIndex: 0,
-                ))),
+                )))),
       );
     }
     else{
-    Navigator.push(
+      String _data = dogy.size;
+      Data data = await DBProvider.db.getData(_data);
+      Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => DogProvider(
               dog: dogy,
-              child: MyBottomNavigationBar(
+              child: DataProvider(
+                data: data,
+                  child: MyBottomNavigationBar(
                 currentIndex: 0,
-              ))),
+              )))),
     );
     }
   }
