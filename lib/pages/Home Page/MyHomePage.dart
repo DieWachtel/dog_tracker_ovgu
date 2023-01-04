@@ -3,6 +3,7 @@ import 'package:tracker_app/data/Database.dart';
 import 'package:tracker_app/data/dog.dart';
 import 'package:tracker_app/widgets/DogProvider.dart';
 import 'package:tracker_app/widgets/BottomNavigation.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 
 
@@ -26,7 +27,17 @@ class MyHomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Row(
+            Container(
+                margin: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(50, 0, 0, 0),
+                      blurRadius: 15,
+                    ),
+                  ],
+                ),
+                child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,8 +45,8 @@ class MyHomePage extends StatelessWidget {
                 Container(
                     width: 180,
                     height: 60,
-                    color: Colors.grey,
-                    child: FlatButton(
+                    color: Colors.white70,
+                    child: TextButton(
                       onPressed: () async {},
                       child: Text('Start',
                         style: TextStyle(
@@ -47,22 +58,22 @@ class MyHomePage extends StatelessWidget {
                   width: 180,
                   height: 60,
                   alignment: Alignment.center,
-                  color: Colors.grey, // changing dependent on km
-                  child: Text('0/10 km',
-                    style: TextStyle(
-                        fontSize: 22,
-                        letterSpacing: 2
-                    ))
+                  color: Colors.white70, // changing dependent on km
+                  child: AutoSizeText(
+                    '0/10 km',
+                    style: TextStyle(fontSize: 22),
+                    maxLines: 1,
+                    )
                 ), // changing dependent on km
               ],
-            ),
+            )),
             Container(
-              width: 375,
+              width: 376,
               height: 120,
               color: Colors.grey,
             ),
             Container(
-              width: 375,
+              width: 376,
               height: 240,
               color: Colors.grey,
             ),

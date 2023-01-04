@@ -30,11 +30,11 @@ class _HomeState extends State<MyBottomNavigationBar> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.location_on),
-                title: Text('Home'),
+                label: 'Home',
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.pets),
-                title: Text('Profile'),
+                label: 'Profile',
                 backgroundColor: Colors.blue),
           ],
           onTap: (index) {

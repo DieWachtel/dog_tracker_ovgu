@@ -84,11 +84,12 @@ class _MyWelcomePageState extends State<MyWelcomePage> {
             SizedBox(
               height: 20,
             ),
-            RaisedButton(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
-              color: Colors.blue,
-              highlightElevation: 2,
-              elevation: 8,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),//EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                backgroundColor: Colors.blue,
+                elevation: 8,
+              ),
               child: Text('Go!',
                   style: TextStyle(
                       fontSize: 25,
