@@ -202,5 +202,111 @@ class _CustomDialogState extends State<CustomDialog> {
       );
     }
 
+    if (value == 'size') {
+      return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),//EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                  backgroundColor: Colors.blue,
+                  elevation: 8,
+                ),
+                child: Text('Small',
+                    style: TextStyle(
+                        fontSize: 25,
+                        letterSpacing: 2
+                    )
+                ),
+                onPressed: () async {
+                  data = await DBProvider.db.getData('Small');
+                  await DBProvider.db.changeSize('Small', dog.name);
+                  dog = await DBProvider.db.getUser(1);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DogProvider(
+                                dog: dog,
+                                child: DataProvider(
+                                    data: data,
+                                    child: MyBottomNavigationBar(
+                                      currentIndex: 1,
+                                    )))),
+                  );
+                }
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),//EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                  backgroundColor: Colors.blue,
+                  elevation: 8,
+                ),
+                child: Text('Medium',
+                    style: TextStyle(
+                        fontSize: 25,
+                        letterSpacing: 2
+                    )
+                ),
+                onPressed: () async {
+                  data = await DBProvider.db.getData('Medium');
+                  await DBProvider.db.changeSize('Medium', dog.name);
+                  dog = await DBProvider.db.getUser(1);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DogProvider(
+                                dog: dog,
+                                child: DataProvider(
+                                    data: data,
+                                    child: MyBottomNavigationBar(
+                                      currentIndex: 1,
+                                    )))),
+                  );
+                }
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),//EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                  backgroundColor: Colors.blue,
+                  elevation: 8,
+                ),
+                child: Text('Large',
+                    style: TextStyle(
+                        fontSize: 25,
+                        letterSpacing: 2
+                    )
+                ),
+                onPressed: () async {
+                  data = await DBProvider.db.getData('Large');
+                  await DBProvider.db.changeSize('Large', dog.name);
+                  dog = await DBProvider.db.getUser(1);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DogProvider(
+                                dog: dog,
+                                child: DataProvider(
+                                    data: data,
+                                    child: MyBottomNavigationBar(
+                                      currentIndex: 1,
+                                    )))),
+                  );
+                }
+            )
+          ]
+      );
+    }
+
   }
 }

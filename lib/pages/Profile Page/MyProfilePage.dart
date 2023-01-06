@@ -31,6 +31,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
   Widget build(BuildContext context) {
     Dog dog = DogProvider.of(context).dog;
     Data data = DataProvider.of(context).data;
+    print(data.size);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -41,14 +42,14 @@ class _MyProfilePageState extends State<MyProfilePage> {
       ),
       body: SafeArea(
         child: Container(
-          margin: const EdgeInsets.all(30.0),
+          margin: const EdgeInsets.all(45.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -61,7 +62,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   children: <Widget>[
                     SizedBox(
                       width: 195,
-                      child: Text(DogProvider.of(context).dog.name,
+                      child: Text(dog.name,
                           textAlign: TextAlign.right,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -82,7 +83,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -95,7 +96,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   children: <Widget>[
                     SizedBox(
                       width: 195,
-                      child: Text(DogProvider.of(context).dog.age.toString(),
+                      child: Text(dog.age.toString(),
                           textAlign: TextAlign.right,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -117,20 +118,38 @@ class _MyProfilePageState extends State<MyProfilePage> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('Race:',
+                Text('Size:',
                     style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w600,
                         fontSize: 22.0)),
-                //drop-down menu
+                SizedBox(
+                  width: 195,
+                  child: Text(data.size,
+                      textAlign: TextAlign.right,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0)),
+                ),
+                IconButton(
+                  icon: Icon(Icons.create, size: 20, color: Colors.blue,),
+                  onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => CustomDialog("size", dog, data),
+                    );
+                  },
+                )
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -139,6 +158,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         color: Colors.blue,
                         fontWeight: FontWeight.w600,
                         fontSize: 22.0)),
+                Text('${data.distance} km',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20.0)),
+                Icon(Icons.directions_walk, size: 20, color: Colors.blue,),
                 // get from predefined database
               ],
             ),

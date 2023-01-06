@@ -24,10 +24,10 @@ class _MyWelcomePageState extends State<MyWelcomePage> {
     Data data = await DBProvider.db.getData('gross');
     if (data == null){
 
-      var _gross = Data(size: 'gross', distance: 10);
-      var _mittel = Data(size: 'mittel', distance: 7);
-      var _klein = Data(size: 'klein', distance: 5);
-      var _undef = Data(size: 'nichts', distance: 0);
+      var _gross = Data(size: 'Large', distance: 10);
+      var _mittel = Data(size: 'Medium', distance: 7);
+      var _klein = Data(size: 'Small', distance: 5);
+      var _undef = Data(size: '', distance: 0);
 
       final List<Data> _dogData = [
         _gross,
@@ -43,8 +43,8 @@ class _MyWelcomePageState extends State<MyWelcomePage> {
 
     Dog dogy = await DBProvider.db.getUser(1);
     if(dogy == null){
-      data = await DBProvider.db.getData('nichts');
-      var newDog = Dog(id: 1, name: 'please create Profile', age: 0, size: 'nichts');
+      data = await DBProvider.db.getData('');
+      var newDog = Dog(id: 1, name: 'please create Profile', age: 0, size: '');
       await DBProvider.db.newUser(newDog);
       Navigator.push(
         context,

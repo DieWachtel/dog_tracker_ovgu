@@ -109,6 +109,14 @@ class DBProvider {
     return changeAge;
   }
 
+  Future<int> changeSize(String size, String name) async {
+    var db = await database;
+    var changeSize = await db.rawUpdate('''
+    UPDATE profile SET size = ? WHERE name = ?''', [size, name]);
+
+    return changeSize;
+  }
+
   Future<int> deleteProfile() async {
     var db = await database;
     int res = await db.delete("profile AND walks");
