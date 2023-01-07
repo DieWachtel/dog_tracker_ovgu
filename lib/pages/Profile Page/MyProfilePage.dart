@@ -38,7 +38,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
           automaticallyImplyLeading: false,
-          title: Text('Profile Page')
+          title: Text('Dog Profile')
       ),
       body: SafeArea(
         child: Container(

@@ -7,12 +7,18 @@ import 'package:tracker_app/widgets/BottomNavigation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:tracker_app/data/data.dart';
 import 'package:tracker_app/widgets/DataProvider.dart';
+import 'package:tracker_app/pages/Home Page/StartStopp.dart';
 
 
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
 
+  @override
+  _MyHomePage createState() => _MyHomePage();
+}
+
+class _MyHomePage extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +52,7 @@ class MyHomePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                    width: 180,
-                    height: 60,
-                    color: Colors.white70,
-                    child: TextButton(
-                      onPressed: () async {},
-                      child: Text('Start',
-                        style: TextStyle(
-                          fontSize: 22,
-                          letterSpacing: 2
-                        ))
-                )),
+                StartStopp(),
                 Container(
                   width: 180,
                   height: 60,
