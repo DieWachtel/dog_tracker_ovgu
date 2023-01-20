@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:tracker_app/widgets/BottomNavigation.dart';
 import 'package:tracker_app/widgets/DogProvider.dart';
 import 'package:tracker_app/widgets/DataProvider.dart';
@@ -20,9 +22,9 @@ class CustomDialog extends StatefulWidget {
 class _CustomDialogState extends State<CustomDialog> {
   final _formKey = GlobalKey<FormState>();
 
-  String _name;
-  int _age;
-  String _oldname;
+  String? _name;
+  int? _age;
+  String? _oldname;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class _CustomDialogState extends State<CustomDialog> {
     );
   }
 
-  getText(String value, Dog dog, Data data) {
+  getText(String value, Dog dog, Data? data) {
     _oldname = dog.name;
     if (value == 'name') {
       return Form(
@@ -84,7 +86,7 @@ class _CustomDialogState extends State<CustomDialog> {
               ),
               style: TextStyle(fontSize: 20.0),
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return 'Please enter a name';
                 }
                 if (value == dog.name) {
@@ -103,11 +105,11 @@ class _CustomDialogState extends State<CustomDialog> {
                 alignment: Alignment.bottomRight,
                 child: TextButton(
                   onPressed: () async {
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       if (true && (dog.name != _name)) {
                         print(_name);
                         await DBProvider.db.changeName(_name, _oldname);
-                        dog = await DBProvider.db.getUser(1);
+                        dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -152,7 +154,7 @@ class _CustomDialogState extends State<CustomDialog> {
               ),
               style: TextStyle(fontSize: 20.0),
               validator: (value) {
-                if (value.isEmpty) {
+                if (value!.isEmpty) {
                   return 'Please enter an age';
                 }
                 if (int.tryParse(value) == dog.age) {
@@ -171,10 +173,10 @@ class _CustomDialogState extends State<CustomDialog> {
                 alignment: Alignment.bottomRight,
                 child: TextButton(
                   onPressed: () async {
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       if (true && (dog.age != _age)) {
                         await DBProvider.db.changeAge(_age, _name);
-                        dog = await DBProvider.db.getUser(1);
+                        dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -223,7 +225,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 onPressed: () async {
                   data = await DBProvider.db.getData('Small');
                   await DBProvider.db.changeSize('Small', dog.name);
-                  dog = await DBProvider.db.getUser(1);
+                  dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -256,7 +258,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 onPressed: () async {
                   data = await DBProvider.db.getData('Medium');
                   await DBProvider.db.changeSize('Medium', dog.name);
-                  dog = await DBProvider.db.getUser(1);
+                  dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -289,7 +291,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 onPressed: () async {
                   data = await DBProvider.db.getData('Large');
                   await DBProvider.db.changeSize('Large', dog.name);
-                  dog = await DBProvider.db.getUser(1);
+                  dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
                   Navigator.push(
                     context,
                     MaterialPageRoute(

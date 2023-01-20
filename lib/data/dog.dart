@@ -5,10 +5,10 @@ Dog userFromJson(String str) => Dog.fromJson(json.decode(str));
 String userToJson(Dog data) => json.encode(data.toJson());
 
 class Dog {
-  int id;
-  String name;
-  int age;
-  String size;
+  int? id;
+  String? name;
+  int? age;
+  String? size;
 
   Dog({
     this.id,

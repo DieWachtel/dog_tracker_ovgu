@@ -9,7 +9,7 @@ import 'package:tracker_app/widgets/PopUpChange.dart';
 
 
 class MyProfilePage extends StatefulWidget {
-  MyProfilePage({Key key}) : super(key: key);
+  MyProfilePage({Key? key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -29,8 +29,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    Dog dog = DogProvider.of(context).dog;
-    Data data = DataProvider.of(context).data;
+    Dog dog = DogProvider.of(context)!.dog;
+    Data data = DataProvider.of(context)!.data!;
     print(data.size);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -62,7 +62,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   children: <Widget>[
                     SizedBox(
                       width: 195,
-                      child: Text(dog.name,
+                      child: Text(dog.name!,
                           textAlign: TextAlign.right,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -129,7 +129,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         fontSize: 22.0)),
                 SizedBox(
                   width: 195,
-                  child: Text(data.size,
+                  child: Text(data.size!,
                       textAlign: TextAlign.right,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

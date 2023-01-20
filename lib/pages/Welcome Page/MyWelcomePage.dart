@@ -9,7 +9,7 @@ import 'package:tracker_app/data/data.dart';
 
 
 class MyWelcomePage extends StatefulWidget {
-  MyWelcomePage({Key key}) : super(key: key);
+  MyWelcomePage({Key? key}) : super(key: key);
   
   @override
   _MyWelcomePageState createState() => _MyWelcomePageState();
@@ -21,7 +21,7 @@ class _MyWelcomePageState extends State<MyWelcomePage> {
   // ignore: non_constant_identifier_names
   Future<void> pushToWelcome() async{
     //init predefined dog distances
-    Data data = await DBProvider.db.getData('gross');
+    Data? data = await DBProvider.db.getData('gross');
     if (data == null){
 
       var _gross = Data(size: 'Large', distance: 10);
@@ -41,7 +41,7 @@ class _MyWelcomePageState extends State<MyWelcomePage> {
       }
     }
 
-    Dog dogy = await DBProvider.db.getUser(1);
+    Dog? dogy = await DBProvider.db.getUser(1);
     if(dogy == null){
       data = await DBProvider.db.getData('');
       var newDog = Dog(id: 1, name: 'please create Profile', age: 0, size: '');
@@ -59,8 +59,8 @@ class _MyWelcomePageState extends State<MyWelcomePage> {
       );
     }
     else{
-      String _data = dogy.size;
-      Data data = await DBProvider.db.getData(_data);
+      String? _data = dogy.size;
+      Data? data = await DBProvider.db.getData(_data);
       Navigator.push(
       context,
       MaterialPageRoute(

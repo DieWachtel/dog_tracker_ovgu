@@ -5,10 +5,10 @@ Walk userFromJson(String str) => Walk.fromJson(json.decode(str));
 String userToJson(Walk data) => json.encode(data.toJson());
 
 class Walk {
-  int id;
-  String name;
-  String date;
-  int distance;
+  int? id;
+  String? name;
+  String? date;
+  int? distance;
 
   Walk({
     this.id,

@@ -5,8 +5,8 @@ Data userFromJson(String str) => Data.fromJson(json.decode(str));
 String userToJson(Data data) => json.encode(data.toJson());
 
 class Data {
-  String size;
-  int distance;
+  String? size;
+  int? distance;
 
   Data({
     this.size,

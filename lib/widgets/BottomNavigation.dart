@@ -4,8 +4,8 @@ import 'package:tracker_app/pages/Profile Page/MyProfilePage.dart';
 
 
 class MyBottomNavigationBar extends StatefulWidget {
-  MyBottomNavigationBar({Key key, this.currentIndex}) : super(key: key);
-  int currentIndex;
+  MyBottomNavigationBar({Key? key, this.currentIndex}) : super(key: key);
+  int? currentIndex;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -19,9 +19,9 @@ class _HomeState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _children[widget.currentIndex],
+      body: _children[widget.currentIndex!],
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: widget.currentIndex,
+          currentIndex: widget.currentIndex!,
           type: BottomNavigationBarType.shifting,
           iconSize: 35,
           backgroundColor: Colors.blue,

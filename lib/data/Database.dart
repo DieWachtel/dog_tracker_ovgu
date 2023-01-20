@@ -15,11 +15,11 @@ class DBProvider {
   static final DBProvider db = DBProvider._();
 
   factory DBProvider() => db;
-  static Database _database;
+  static Database? _database;
 
   //static Database _databaseQ;
 
-  Future<Database> get database async {
+  Future<Database?> get database async {
     if (_database != null) return _database;
 
     _database = await initDB();
@@ -48,7 +48,7 @@ class DBProvider {
   }
 
   newUser(Dog newDog) async {
-    final db = await database;
+    final db = await (database as FutureOr<Database>);
 
     var res = await db.rawInsert('''
       INSERT INTO profile(
@@ -59,8 +59,8 @@ class DBProvider {
     return res;
   }
 
-  Future<Dog> getUser(int id) async{
-    final db = await database;
+  Future<Dog?> getUser(int id) async{
+    final db = await (database as FutureOr<Database>);
     var result = await db.rawQuery('''
     SELECT * FROM profile WHERE id = ?''', [id]);
     if (result.length == 0) {
@@ -71,7 +71,7 @@ class DBProvider {
   }
 
   newData(Data data) async{
-    final db = await database;
+    final db = await (database as FutureOr<Database>);
 
       var res = await db.rawInsert('''
         INSERT INTO data(
@@ -82,8 +82,8 @@ class DBProvider {
       return res;
   }
 
-  Future<Data> getData(String size) async {
-    var db = await database;
+  Future<Data?> getData(String? size) async {
+    var db = await (database as FutureOr<Database>);
     var result = await db.rawQuery('''
     SELECT * FROM data WHERE size = ?''', [size]);
     if (result.length == 0) return null;
@@ -91,8 +91,8 @@ class DBProvider {
     return Data.fromJson(result.first);
   }
 
-  Future<int> changeName(String name, String oldname) async {
-    var db = await database;
+  Future<int> changeName(String? name, String? oldname) async {
+    var db = await (database as FutureOr<Database>);
     var changeName = await db.rawUpdate('''
     UPDATE profile SET name = ? WHERE name = ?
     ''', [name, oldname]);
@@ -101,16 +101,16 @@ class DBProvider {
     return changeName;
   }
 
-  Future<int> changeAge(int age, String name) async {
-    var db = await database;
+  Future<int> changeAge(int? age, String? name) async {
+    var db = await (database as FutureOr<Database>);
     var changeAge = await db.rawUpdate('''
     UPDATE profile SET age = ? WHERE name = ?''', [age, name]);
 
     return changeAge;
   }
 
-  Future<int> changeSize(String size, String name) async {
-    var db = await database;
+  Future<int> changeSize(String size, String? name) async {
+    var db = await (database as FutureOr<Database>);
     var changeSize = await db.rawUpdate('''
     UPDATE profile SET size = ? WHERE name = ?''', [size, name]);
 
@@ -118,13 +118,13 @@ class DBProvider {
   }
 
   Future<int> deleteProfile() async {
-    var db = await database;
+    var db = await (database as FutureOr<Database>);
     int res = await db.delete("profile AND walks");
     return res;
   }
 
   newWalk(Walk newWalk) async {
-    final db = await database;
+    final db = await (database as FutureOr<Database>);
 
     var res = await db.rawInsert('''
       INSERT INTO walks(
@@ -136,7 +136,7 @@ class DBProvider {
   }
 
   Future<String> getRecords(String name) async {
-    var db = await database;
+    var db = await (database as FutureOr<Database>);
     var resultRecords = await db.rawQuery('''
     SELECT count(id) FROM ques WHERE name = ?
     ''', [name]);
@@ -145,28 +145,28 @@ class DBProvider {
     return jsonEncode(resultRecords);
   }
 
-  Future<String> getDate(String name, int i) async {
-    var db = await database;
+  Future<String?> getDate(String name, int i) async {
+    var db = await (database as FutureOr<Database>);
     var resultDate = await db.rawQuery('''
     SELECT date FROM walks WHERE name = ?''',
         [name]);
     if (resultDate.length == 0) return null;
 
     Map<dynamic, dynamic> map = resultDate[i];
-    String str = map["date"];
+    String? str = map["date"];
 
     return str;
   }
 
-  Future<String> getDistance(String name, int i) async {
-    var db = await database;
+  Future<String?> getDistance(String name, int i) async {
+    var db = await (database as FutureOr<Database>);
     var resultDistance = await db.rawQuery('''
     SELECT distance FROM walks WHERE name = ?''',
         [name]);
     if (resultDistance.length == 0) return null;
 
     Map<dynamic, dynamic> map = resultDistance[i];
-    String str = map["distance"];
+    String? str = map["distance"];
 
     return str;
   }
