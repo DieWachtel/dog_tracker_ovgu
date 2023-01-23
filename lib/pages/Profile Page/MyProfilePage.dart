@@ -42,7 +42,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
       ),
       body: SafeArea(
         child: Container(
-          margin: const EdgeInsets.all(45.0),
+          margin: const EdgeInsets.all(25.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,

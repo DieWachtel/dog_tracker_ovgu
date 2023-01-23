@@ -225,7 +225,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 onPressed: () async {
                   data = await DBProvider.db.getData('Small');
                   await DBProvider.db.changeSize('Small', dog.name);
-                  dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
+                  dog = (await (DBProvider.db.getUser(1)))!;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -258,7 +258,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 onPressed: () async {
                   data = await DBProvider.db.getData('Medium');
                   await DBProvider.db.changeSize('Medium', dog.name);
-                  dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
+                  dog = (await (DBProvider.db.getUser(1)))!;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -291,7 +291,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 onPressed: () async {
                   data = await DBProvider.db.getData('Large');
                   await DBProvider.db.changeSize('Large', dog.name);
-                  dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
+                  dog = (await (DBProvider.db.getUser(1)))!;
                   Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -133,14 +133,60 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                    Container(
+            Flexible(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                      Expanded(
+                        child: Container(
+                            margin: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.white70,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(50, 0, 0, 0),
+                                  blurRadius: 15,
+                                ),
+                              ],
+                            ),
+                        //height: 60,
+                            alignment: Alignment.center,
+                            child: TextButton(
+                          child: _stopwatch ? Text('Start',
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  letterSpacing: 2
+                              )) : Text('Stop',
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  letterSpacing: 2,
+                                  color: Colors.orange
+                              )),
+                          onPressed: () {
+                            setState(() {
+                              if(_stopwatch){
+                                _startTracking();
+                                _controller.repeat();
+                                stopwatch.start();
+                              }
+                              else{
+                                _stopTracking();
+                                _controller.stop();
+                                stopwatch.stop();
+                              }
+                              _stopwatch = !_stopwatch;
+                            });
+                          },
+                        )),
+                      ),
+                  Expanded(
+                    child: Container(
                         margin: EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
@@ -152,136 +198,100 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin{
                             ),
                           ],
                         ),
-                    width: 180,
-                    height: 60,
-                    child: TextButton(
-                      child: _stopwatch ? Text('Start',
-                          style: TextStyle(
-                              fontSize: 22,
-                              letterSpacing: 2
-                          )) : Text('Stop',
-                          style: TextStyle(
-                              fontSize: 22,
-                              letterSpacing: 2,
-                              color: Colors.orange
-                          )),
-                      onPressed: () {
-                        setState(() {
-                          if(_stopwatch){
-                            _startTracking();
-                            _controller.repeat();
-                            stopwatch.start();
-                          }
-                          else{
-                            _stopTracking();
-                            _controller.stop();
-                            stopwatch.stop();
-                          }
-                          _stopwatch = !_stopwatch;
-                        });
-                      },
-                    )),
-                Container(
-                    margin: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.white70,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(50, 0, 0, 0),
-                          blurRadius: 15,
-                        ),
-                      ],
-                    ),
-                  width: 180,
-                  height: 60,
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    child: Text('Reset',
-                        style: TextStyle(
-                            fontSize: 22,
-                            letterSpacing: 2
-                        )),
-                      onPressed: () {
-                          setState(() {
-                          _controller.stop();
-                          stopwatch.reset();
-                          _stopwatch = false;
-                      });}
-                  ),
+                      //height: 60,
+                      alignment: Alignment.center,
+                      child: TextButton(
+                        child: Text('Reset',
+                            style: TextStyle(
+                                fontSize: 22,
+                                letterSpacing: 2
+                            )),
+                          onPressed: () {
+                              setState(() {
+                              _controller.stop();
+                              stopwatch.reset();
+                              _stopwatch = true;
+                          });}
+                      ),
+                      ),
                   )
-                ]),
-            Container(
-              margin: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                color: Colors.white70,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(50, 0, 0, 0),
-                    blurRadius: 15,
-                  ),
-                ],
+                  ]),
+            ),
+            Flexible(
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: Colors.white70,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(50, 0, 0, 0),
+                      blurRadius: 15,
+                    ),
+                  ],
+                ),
+                //height: 90,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Walk time:',
+                        style: TextStyle(
+                          fontSize: 22,
+                          letterSpacing: 2)
+                      ),
+                      Text(
+                          stopwatch.elapsed.inMinutes.toString().padLeft(2, '0') +
+                              ':' +
+                              (stopwatch.elapsed.inSeconds % 60)
+                                  .toString()
+                                  .padLeft(2, '0'),
+                          style: TextStyle(fontSize: 20)),
+                    ]
+                ),
               ),
-              width: 376,
-              height: 120,
-              child: Column(
+            ),
+            Flexible(
+              flex: 3,
+              child: Container(
+                margin: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: Colors.white70,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(50, 0, 0, 0),
+                      blurRadius: 15,
+                    ),
+                  ],
+                ),
+                //height: 270,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Walk time:',
-                      style: TextStyle(
-                        fontSize: 22,
-                        letterSpacing: 2)
-                    ),
-                    Text(
-                        stopwatch.elapsed.inMinutes.toString().padLeft(2, '0') +
-                            ':' +
-                            (stopwatch.elapsed.inSeconds % 60)
-                                .toString()
-                                .padLeft(2, '0'),
-                        style: TextStyle(fontSize: 20)),
-                  ]
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                color: Colors.white70,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(50, 0, 0, 0),
-                    blurRadius: 15,
-                  ),
-                ],
-              ),
-              width: 376,
-              height: 240,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Last distance:",
-                      style: TextStyle(
-                          fontSize: 22,
-                          letterSpacing: 2)),
-                  Text("${_distance.toStringAsFixed(2)} km",
-                      style: TextStyle(
-                          fontSize: 20,
-                          letterSpacing: 2)),
-                  SizedBox(height: 10,),
-                  Text("Total distance:",
-                      style: TextStyle(
-                          fontSize: 22,
-                          letterSpacing: 2)),
-                  Text("${_totalDistance.toStringAsFixed(2)} / ${data.distance.toString()}  km",
-                      style: TextStyle(
-                          fontSize: 20,
-                          letterSpacing: 2)),
-                ],
+                    Text("Last distance:",
+                        style: TextStyle(
+                            fontSize: 22,
+                            letterSpacing: 2)),
+                    Text("${_distance.toStringAsFixed(2)} km",
+                        style: TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 2)),
+                    //SizedBox(height: 10,),
+                    Text("Total distance:",
+                        style: TextStyle(
+                            fontSize: 22,
+                            letterSpacing: 2)),
+                    Text("${_totalDistance.toStringAsFixed(2)} / ${data.distance.toString()}  km",
+                        style: TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 2)),
+                  ],
+                ),
               ),
             ),
           ],
