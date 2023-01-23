@@ -26,6 +26,7 @@ class _CustomDialogState extends State<CustomDialog> {
   int? _age;
   String? _oldname;
 
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -109,7 +110,7 @@ class _CustomDialogState extends State<CustomDialog> {
                       if (true && (dog.name != _name)) {
                         print(_name);
                         await DBProvider.db.changeName(_name, _oldname);
-                        dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
+                        dog = (await (DBProvider.db.getUser(1)))!;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -176,7 +177,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     if (_formKey.currentState!.validate()) {
                       if (true && (dog.age != _age)) {
                         await DBProvider.db.changeAge(_age, _name);
-                        dog = await (DBProvider.db.getUser(1) as FutureOr<Dog>);
+                        dog = (await (DBProvider.db.getUser(1)))!;
                         Navigator.push(
                           context,
                           MaterialPageRoute(

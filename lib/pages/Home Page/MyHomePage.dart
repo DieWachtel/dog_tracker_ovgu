@@ -117,6 +117,10 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin{
       }
     }
 
+  int? _getdismod(int? _age, int? _distance){
+    if(_age!<3||_age!>8) _distance = (_distance!-2)!;
+    return _distance;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +290,7 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin{
                         style: TextStyle(
                             fontSize: 22,
                             letterSpacing: 2)),
-                    Text("${_totalDistance.toStringAsFixed(2)} / ${data.distance.toString()}  km",
+                    Text("${_totalDistance.toStringAsFixed(2)} / ${_getdismod(dog.age, data.distance)}  km",
                         style: TextStyle(
                             fontSize: 20,
                             letterSpacing: 2)),

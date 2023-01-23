@@ -26,6 +26,10 @@ class MyProfilePage extends StatefulWidget {
 
 class _MyProfilePageState extends State<MyProfilePage> {
 
+  int? _getdismod(int? _age, int? _distance){
+    if(_age!<3||_age!>8) _distance = (_distance!-2)!;
+    return _distance;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +162,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         color: Colors.blue,
                         fontWeight: FontWeight.w600,
                         fontSize: 22.0)),
-                Text('${data.distance} km',
+                Text('${_getdismod(dog.age, data.distance)} km',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
